@@ -1,6 +1,7 @@
 <div class="book">
-  <Page pagelist={pages} current={pageindex}></Page>
+  <Page pagelist={pages} ></Page>
 </div>
+<button on:click={last}>上一页</button>
 <button on:click={flip}>下一页</button>
 
 <script lang="ts">
@@ -61,14 +62,30 @@
   let flip = () => {
     if(pageindex + 1 != pages.length) {
       pageindex ++
+      if(pageindex>-1) {
+        let i = pages.length - (1 + pageindex)
+        pages[i].isflip = true
+      }
     }
   }
+  let last = () => {
+    pageindex --
+    if(pageindex>-1) {
+      let i = pages.length - 2 - pageindex
+      console.log(i);
+      
+      pages[i].isflip = false
+    } else if(pageindex === -1) {
+      pages[pages.length-1].isflip = false
+    }
+  }
+  
 </script>
 
 <style>
   .book {
-    width: 100px;
-    height: 100px;
+    width: 300px;
+    height: 300px;
     position: absolute;
     top: 20%;
     left: 40%;
@@ -78,5 +95,7 @@
     -moz-transform-style: preserve-3d;
     -ms-transform-style: preserve-3d;
     transform-style: preserve-3d;
+    box-shadow: 3px 3px 2px 2px #dad6d6;
+    transform: rotateX(15deg);
   }
 </style>

@@ -1,6 +1,6 @@
 
 {#each pagelist as p, i}
-  <div class="page {p.isflip?'flip-animation':''}" style="z-index: { p.isflip? p.no: 1};">
+  <div class="page {p.isflip?'flip-animation':'flipback-animation'}" style="z-index: { p.isflip? p.no: 1};">
     <div class="face">{p.content}</div>
     <div class="back">{p.content + '背面' }</div>
   </div>  
@@ -18,14 +18,6 @@
   }
 
   export let pagelist:Array<PageInfo>;
-  export let current: number;
-
-  $: {
-    if(current>-1) {
-      let i = pagelist.length - (1 + current)
-      pagelist[i].isflip = true
-    }
-  }
 
 </script>
 
@@ -82,6 +74,26 @@
       -ms-transform: rotateY(-180deg);
       -o-transform: rotateY(-180deg);
       transform: rotateY(-180deg);
+    }
+  }
+
+  .flipback-animation {
+    animation: flipBookback 3s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes flipBookback {
+    0% {
+      -webkit-transform: rotateY(-180deg);
+      -ms-transform: rotateY(-180deg);
+      -o-transform: rotateY(-180deg);
+      transform: rotateY(-180deg);
+    }
+    100% {
+      -webkit-transform: rotateY(0deg);
+      -ms-transform: rotateY(0deg);
+      -o-transform: rotateY(0deg);
+      transform: rotateY(0deg);
     }
   }
 
