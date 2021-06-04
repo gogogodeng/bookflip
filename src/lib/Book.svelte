@@ -95,7 +95,6 @@
     -moz-transform-style: preserve-3d;
     -ms-transform-style: preserve-3d;
     transform-style: preserve-3d;
-    box-shadow: 3px 3px 2px 2px #dad6d6;
     transform: rotateX(15deg);
   }
 </style>

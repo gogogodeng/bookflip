@@ -1,6 +1,6 @@
 
 {#each pagelist as p, i}
-  <div class="page {p.isflip?'flip-animation':'flipback-animation'}" style="z-index: { p.isflip? p.no: 1};">
+  <div class="page {p.isflip?'flip':'flipback'}" style="z-index: { p.isflip? p.no: 1};">
     <div class="face">{p.content}</div>
     <div class="back">{p.content + '背面' }</div>
   </div>  
@@ -37,6 +37,8 @@
     -ms-transform-origin: 0% 50%;
     -o-transform-origin: 0% 50%;
     transform-style: preserve-3d;
+    transition: all 1s linear;
+    box-shadow: 2px 2px 1px 1px #f1f1f1;
   }
 
   .face {
@@ -55,46 +57,12 @@
     transform: rotateY(180deg);
   }
 
-  /*动画部分*/
-  .flip-animation {
-    animation: flipBook 3s;
-    animation-fill-mode: forwards;
+  .flip {
+    transform: rotateY(-180deg);
   }
 
-  @keyframes flipBook {
-    0% {
-      -webkit-transform: rotateY(0deg);
-      -ms-transform: rotateY(0deg);
-      -o-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-    }
-
-    100% {
-      -webkit-transform: rotateY(-180deg);
-      -ms-transform: rotateY(-180deg);
-      -o-transform: rotateY(-180deg);
-      transform: rotateY(-180deg);
-    }
-  }
-
-  .flipback-animation {
-    animation: flipBookback 3s;
-    animation-fill-mode: forwards;
-  }
-
-  @keyframes flipBookback {
-    0% {
-      -webkit-transform: rotateY(-180deg);
-      -ms-transform: rotateY(-180deg);
-      -o-transform: rotateY(-180deg);
-      transform: rotateY(-180deg);
-    }
-    100% {
-      -webkit-transform: rotateY(0deg);
-      -ms-transform: rotateY(0deg);
-      -o-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-    }
+  .flipback {
+    transform: rotateY(0deg);
   }
 
 </style>
